@@ -1,0 +1,26 @@
+/**
+ * Mostly server stuff
+ */
+
+// main deps
+const http = require('http');
+
+// load our app to serve
+const app = require('../app');
+const socket = require('../socket');
+
+// default to a given port
+const port = process.env.PORT || 5000;
+
+app.set('port', port);
+
+const server = http.createServer(app);
+
+// start the http server
+server.listen(port);
+
+// start the socket server
+socket.init(server);
+
+// inform us of the running server
+server.on('listening', () => console.log(`Server running on port ${port}`));
