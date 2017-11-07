@@ -23,7 +23,7 @@ function conn(sck) {
   sck.on('question', (data) => {
     logger('Question GET');
     questions.push(data);
-    emitAll('question', data);
+    emitAll('question', [data]);
   });
 }
 
