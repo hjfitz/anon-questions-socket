@@ -9,13 +9,16 @@ function emitAll(type, payload) {
 }
 
 function conn(sck) {
-  logger('Person connected');
+  logger(`${sck.id} connected`);
 
   // update the list of websocket clients
   sockets.push(sck);
 
   // because someone's connected, update them with all of the questions
   sck.emit('question', questions);
+
+  // respond to pings
+  sck.on('keepalive', () => logger(`${sck.id} pinged`));
 
   // add an event listener for a question
   // on a question, update the total list
@@ -24,6 +27,12 @@ function conn(sck) {
     logger('Question GET');
     questions.push(data);
     emitAll('question', [data]);
+  });
+
+  sck.on('disconnect', (reason) => {
+    const index = sockets.indexOf(sck);
+    console.log(index);
+    console.log(sck.id);
   });
 }
 
