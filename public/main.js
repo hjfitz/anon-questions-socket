@@ -33,5 +33,5 @@ function send(e) {
  submit.addEventListener('click', send);
  text.addEventListener('keypress', send);
 
-const thisInterval = window.setInterval(keepalive, 60000);
+const thisInterval = window.setInterval(keepalive, 59000);
 

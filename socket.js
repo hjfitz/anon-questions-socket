@@ -13,6 +13,7 @@ function conn(sck) {
 
   // update the list of websocket clients
   sockets.push(sck);
+  logger(`${sockets.length} total sockets connected`);
 
   // because someone's connected, update them with all of the questions
   sck.emit('question', questions);
@@ -31,8 +32,9 @@ function conn(sck) {
 
   sck.on('disconnect', (reason) => {
     const index = sockets.indexOf(sck);
-    console.log(index);
-    console.log(sck.id);
+    if (index !== -1) sockets.splice(index, 1);
+    logger(`${sck.id} disconnected.`);
+    logger(`${sockets.length} sockets remain`);
   });
 }
 
