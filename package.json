@@ -19,5 +19,8 @@
     "eslint": "^4.10.0",
     "eslint-config-google": "^0.9.1",
     "nodemon": "^1.12.1"
+  },
+  "engines": {
+    "node": "8.9.x"
   }
 }
